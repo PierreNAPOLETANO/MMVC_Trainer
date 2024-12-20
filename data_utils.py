@@ -221,6 +221,7 @@ class TextAudioSpeakerLoader(torch.utils.data.Dataset):
             if self.min_text_len <= len(text) and len(text) <= self.max_text_len:
                 audiopaths_sid_text_new.append([audiopath, sid, text])
                 lengths.append(os.path.getsize(audiopath) // (2 * self.hop_length))
+
         self.audiopaths_sid_text = audiopaths_sid_text_new
         self.lengths = lengths
 
@@ -325,8 +326,7 @@ class TextAudioSpeakerLoader(torch.utils.data.Dataset):
         return text_norm
 
     def get_sid(self, sid):
-        sid = torch.LongTensor([int(sid)])
-        return sid
+        return torch.LongTensor([int(sid)])
 
     def __getitem__(self, index):
         return self.get_audio_text_speaker_pair(self.audiopaths_sid_text[index])

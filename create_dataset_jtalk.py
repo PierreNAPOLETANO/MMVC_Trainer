@@ -24,6 +24,7 @@ def create_json(filename, num_speakers, sr, config_path):
     if os.path.exists(config_path):
         with open(config_path, "r", encoding="utf-8") as f:
             data = json.load(f)
+
     data['data']['training_files'] = 'filelists/' + filename + '_textful.txt'
     data['data']['validation_files'] = 'filelists/' + filename + '_textful_val.txt'
     data['data']['training_files_notext'] = 'filelists/' + filename + '_textless.txt'
@@ -45,6 +46,7 @@ def create_dataset(filename):
     output_file_list_val = list()
     output_file_list_textless = list()
     output_file_list_val_textless = list()
+    
     for d in textful_dir_list:
         wav_file_list = glob.glob(d+"/wav/*.wav")
         lab_file_list = glob.glob(d + "/text/*.txt")
